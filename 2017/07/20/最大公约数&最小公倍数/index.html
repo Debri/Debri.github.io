@@ -176,14 +176,14 @@
         <h2 id="最大公约数-greatest-common-divisor"><a href="#最大公约数-greatest-common-divisor" class="headerlink" title="最大公约数(greatest common divisor)"></a>最大公约数(greatest common divisor)</h2><h3 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h3><blockquote>
 <p>欧几里德算法又称辗转相除法，用于计算两个整数a,b的最大公约数。其计算原理依赖于下面的定理： </p>
 </blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">gcd</span><span class="params">(a,b)</span></span> = gcd(<span class="selector-tag">b</span>,<span class="selector-tag">a</span> mod b)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcd(a,b) = gcd(b,a mod b)</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>证明：a可以表示成a = kb + r，则r = a mod b<br>假设d是a,b的一个公约数，则有<br>d|a, d|b，而r = a - kb，因此d|r<br>因此d是(b,a mod b)的公约数 </p>
 <p>假设d 是(b,a mod b)的公约数，则<br>d | b , d |r ，但是a = kb +r<br>因此d也是(a,b)的公约数 </p>
-<p>因此(a,b)和(b,a mod b)的公约数是一样的，其最大公约数也必然相等，<br>直接上代码<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//递归实现</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> m;</div><div class="line">    <span class="keyword">else</span> <span class="function"><span class="keyword">return</span> <span class="title">gcd</span><span class="params">(n, m % n)</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//非递归实现</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (m &lt; n) &#123;<span class="comment">// 保证m&gt;n,若m&lt;n,则进行数据交换</span></div><div class="line">        <span class="keyword">int</span> temp = m;</div><div class="line">        m = n;</div><div class="line">        n = temp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span> (m % n != <span class="number">0</span>) &#123;<span class="comment">// 在余数不能为0时,进行循环</span></div><div class="line">        <span class="keyword">int</span> temp = m % n;</div><div class="line">        m = n;</div><div class="line">        n = temp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> n;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>推广到多个数上求最大的公约数<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 求多个数的最大公约数</span></div><div class="line">public <span class="keyword">static</span> <span class="built_in">int</span> gcdArr(<span class="built_in">int</span>[] <span class="built_in">num</span>, <span class="built_in">int</span> n) &#123; <span class="comment">//n代表标志位，开始时值为数组长度</span></div><div class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span> <span class="built_in">num</span>[n - <span class="number">1</span>];</div><div class="line">    <span class="keyword">return</span> gcd(<span class="built_in">num</span>[n - <span class="number">1</span>], gcdArr(<span class="built_in">num</span>, n - <span class="number">1</span>));<span class="comment">//调用前面的求两个数的最大公约数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因此(a,b)和(b,a mod b)的公约数是一样的，其最大公约数也必然相等，<br>直接上代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//递归实现</div><div class="line">private static int gcd(int m, int n) &#123;</div><div class="line">    if (n == 0) return m;</div><div class="line">    else return gcd(n, m % n);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//非递归实现</div><div class="line">public static int gcd(int m, int n) &#123;</div><div class="line">    if (m &lt; n) &#123;// 保证m&gt;n,若m&lt;n,则进行数据交换</div><div class="line">        int temp = m;</div><div class="line">        m = n;</div><div class="line">        n = temp;</div><div class="line">    &#125;</div><div class="line">    while (m % n != 0) &#123;// 在余数不能为0时,进行循环</div><div class="line">        int temp = m % n;</div><div class="line">        m = n;</div><div class="line">        n = temp;</div><div class="line">    &#125;</div><div class="line">    return n;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>推广到多个数上求最大的公约数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 求多个数的最大公约数</div><div class="line">public static int gcdArr(int[] num, int n) &#123; //n代表标志位，开始时值为数组长度</div><div class="line">    if (n == 1)</div><div class="line">        return num[n - 1];</div><div class="line">    return gcd(num[n - 1], gcdArr(num, n - 1));//调用前面的求两个数的最大公约数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <hr>
-<h2 id="最小公倍数-Least-Common-Multiple"><a href="#最小公倍数-Least-Common-Multiple" class="headerlink" title="最小公倍数(Least Common Multiple)"></a>最小公倍数(Least Common Multiple)</h2><p>代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//求最小公倍数，</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lcm</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> a*b/gcd(a, b);<span class="comment">//调用上面最大公约数的代码</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="最小公倍数-Least-Common-Multiple"><a href="#最小公倍数-Least-Common-Multiple" class="headerlink" title="最小公倍数(Least Common Multiple)"></a>最小公倍数(Least Common Multiple)</h2><p>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//求最小公倍数，</div><div class="line">private static int lcm(int a, int b)&#123;</div><div class="line">    return a*b/gcd(a, b);//调用上面最大公约数的代码</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>多个数的最小公倍数</p>
 <pre><code>public static long lcm(long[] a){
     long value=a[0];
@@ -444,7 +444,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -452,11 +452,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,11 +472,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,11 +480,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
               </li>
             
             <div class="clearfix"></div>

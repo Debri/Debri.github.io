@@ -163,7 +163,7 @@
 </blockquote>
 <a id="more"></a>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>这个问题非常类似于01背包问题，所不同的是每种物品有无限件。也就是从每种物品的角度考虑，与它相关的策略已并非取或不取两种，而是有取0件、取1件、取2件……等很多种。如果仍然按照解01背包时的思路，令f[i][v]表示前i种物品恰放入一个容量为v的背包的最大权值。仍然可以按照每种物品不同的策略写出状态转移方程，像这样：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f[<span class="string">i</span>][<span class="symbol">v</span>]=max&#123;f[<span class="string">i-1</span>][<span class="symbol">v-k*c[i</span>]]+k<span class="emphasis">*w[i]|0&lt;=k*</span>c[i]<span class="xml"><span class="tag">&lt;<span class="name">=v&#125;</span></span></span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f[i][v]=max&#123;f[i-1][v-k*c[i]]+k*w[i]|0&lt;=k*c[i]&lt;=v&#125;</div></pre></td></tr></table></figure>
 <p>这跟01背包问题一样有O(VN)个状态需要求解，但求解每个状态的时间已经不是常数了，求解状态f[i][v]的时间是O(v/c[i])，总的复杂度可以认为是O(V*Σ(V/c[i]))，是比较大的。</p>
 <p>将01背包问题的基本思路加以改进，得到了这样一个清晰的方法。这说明01背包问题的方程的确是很重要，可以推及其它类型的背包问题。但我们还是试图改进这个复杂度。</p>
 <h3 id="简单的优化"><a href="#简单的优化" class="headerlink" title="简单的优化"></a>简单的优化</h3><p>完全背包问题有一个很简单有效的优化，是这样的：若两件物品i、j满足c[i]&lt;=c[j]且w[i]&gt;=w[j]，则将物品j去掉，不用考虑。这个优化的正确性显然：任何情况下都可将价值小费用高得j换成物美价廉的i，得到至少不会更差的方案。对于随机生成的数据，这个方法往往会大大减少物品的件数，从而加快速度。然而这个并不能改善最坏情况的复杂度，因为有可能特别设计的数据可以一件物品也去不掉。</p>
@@ -172,14 +172,14 @@
 <p>更高效的转化方法是：把第i种物品拆成费用为c[i]<em>2^k、价值为w[i]</em>2^k的若干件物品，其中k满足c[i]*2^k&lt;=V。这是二进制的思想，因为不管最优策略选几件第i种物品，总可以表示成若干个2^k件物品的和。这样把每种物品拆成O(log V/c[i])件物品，是一个很大的改进。</p>
 <p>但我们有更优的O(VN)的算法。</p>
 <h3 id="时间复杂度为O-VN-的解法"><a href="#时间复杂度为O-VN-的解法" class="headerlink" title="时间复杂度为O(VN)的解法"></a>时间复杂度为O(VN)的解法</h3><p>这个算法使用一维数组，先看伪代码：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> <span class="attribute">i</span>=1..N</div><div class="line">    <span class="keyword">for</span> <span class="attribute">v</span>=0..V</div><div class="line">        f[v]=max&#123;f[v],f[v-cost]+weight&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for i=1..N</div><div class="line">    for v=0..V</div><div class="line">        f[v]=max&#123;f[v],f[v-cost]+weight&#125;</div></pre></td></tr></table></figure>
 <p>你会发现，这个伪代码与P01的伪代码只有v的循环次序不同而已。为什么这样一改就可行呢？首先想想为什么P01中要按照v=V..0的逆序来循环。这是因为要保证第i次循环中的状态f[i][v]是由状态f[i-1][v-c[i]]递推而来。换句话说，这正是为了保证每件物品只选一次，保证在考虑“选入第i件物品”这件策略时，依据的是一个绝无已经选入第i件物品的子结果f[i-1][v-c[i]]。而现在完全背包的特点恰是每种物品可选无限件，所以在考虑“加选一件第i种物品”这种策略时，却正需要一个可能已选入第i种物品的子结果f[i][v-c[i]]，所以就可以并且必须采用v=0..V的顺序循环。这就是这个简单的程序为何成立的道理。</p>
 <p>值得一提的是，上面的伪代码中两层for循环的次序可以颠倒。这个结论有可能会带来算法时间常数上的优化。</p>
 <p>这个算法也可以以另外的思路得出。例如，将基本思路中求解f[i][v-c[i]]的状态转移方程显式地写出来，代入原方程中，会发现该方程可以等价地变形成这种形式：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f[<span class="string">i</span>][<span class="symbol">v</span>]=max&#123;f[<span class="string">i-1</span>][<span class="symbol">v</span>],f[<span class="string">i</span>][<span class="symbol">v-c[i</span>]]+w[i]&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f[i][v]=max&#123;f[i-1][v],f[i][v-c[i]]+w[i]&#125;</div></pre></td></tr></table></figure>
 <p>将这个方程用一维数组实现，便得到了上面的伪代码。</p>
 <p>最后抽象出处理一件完全背包类物品的过程伪代码：</p>
-<figure class="highlight cal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">procedure</span> <span class="title">CompletePack</span><span class="params">(cost,weight)</span></span></div><div class="line"><span class="function">    <span class="title">for</span> <span class="title">v</span>=<span class="title">cost</span>..<span class="title">V</span></span></div><div class="line"><span class="function">        <span class="title">f</span>[<span class="title">v</span>]=<span class="title">max</span><span class="comment">&#123;f[v],f[v-c[i]]+w[i]&#125;</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">procedure CompletePack(cost,weight)</div><div class="line">    for v=cost..V</div><div class="line">        f[v]=max&#123;f[v],f[v-c[i]]+w[i]&#125;</div></pre></td></tr></table></figure>
       
 
       
@@ -262,18 +262,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/13/插入排序/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/13/LRU算法/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          插入排序
+          lRU 算法
         
       </div>
     </a>
   
   
-    <a href="/2017/06/13/多重背包问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">多重背包</div>
+    <a href="/2017/06/13/快速排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">快速排序</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -431,7 +431,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -439,11 +439,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,11 +459,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -467,11 +467,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
               </li>
             
             <div class="clearfix"></div>

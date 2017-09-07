@@ -176,12 +176,12 @@
         <h3 id="git的那些坑"><a href="#git的那些坑" class="headerlink" title="git的那些坑"></a>git的那些坑</h3><blockquote>
 <p>记录自己在使用git的时候遇到的问题<br><strong>在git pull命令的时候报错</strong></p>
 </blockquote>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git pull</div><div class="line">There is <span class="literal">no</span><span class="built_in"> tracking </span>information <span class="keyword">for</span> the current branch. </div><div class="line">Please specify which branch you want <span class="keyword">to</span> merge with.</div><div class="line">See git-pull(1) <span class="keyword">for</span> details.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git pull</div><div class="line">There is no tracking information for the current branch. </div><div class="line">Please specify which branch you want to merge with.</div><div class="line">See git-pull(1) for details.</div></pre></td></tr></table></figure>
 <p>使用命令解决，原因是本地的修改仓库没有指定对应到远程仓库的哪个分支，即使你已经切换到相应的分支<br>git branch –set-upstream master origin/master</p>
 <p><strong>git 无法创建index.lock</strong></p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Git Pull Failed: Unable to create <span class="string">'E:/code/java/.git/index.lock'</span>: <span class="built_in">File</span> <span class="built_in">exists</span>.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Git Pull Failed: Unable to create &apos;E:/code/java/.git/index.lock&apos;: File exists.</div></pre></td></tr></table></figure>
 <p>需要删除index.lock文件</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd .git</div><div class="line"><span class="selector-tag">del</span> index.lock</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd .git</div><div class="line">del index.lock</div></pre></td></tr></table></figure>
       
 
       
@@ -433,7 +433,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -441,11 +441,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,11 +461,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,11 +469,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
               </li>
             
             <div class="clearfix"></div>

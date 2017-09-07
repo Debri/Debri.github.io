@@ -186,11 +186,11 @@
 <li>ConcreteStrategy 具体策略类</li>
 <li>Context 上下文类，持有具体策略类的实例，并负责调用相关的算法<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3>（1）抽象策略类</li>
 </ol>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public<span class="built_in"> interface </span>Strategy &#123;</div><div class="line">    public void operation(String input);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public interface Strategy &#123;</div><div class="line">    public void operation(String input);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>（2）具体策略类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteStrategyA</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String input)</span> </span>&#123;</div><div class="line">        <span class="comment">//do something</span></div><div class="line">        System.out.println(<span class="string">"ConcreteStrategyA do something : "</span> + input);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public class ConcreteStrategyA implements Strategy &#123;</div><div class="line">    @Override</div><div class="line">    public void operation(String input) &#123;</div><div class="line">        //do something</div><div class="line">        System.out.println(&quot;ConcreteStrategyA do something : &quot; + input);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>（3）策略上下文，负责调用具体的策略</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleContext</span> &#123;</span></div><div class="line">        <span class="keyword">private</span> Strategy strategy;</div><div class="line">    </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">SimpleContext</span><span class="params">(Strategy strategy)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.strategy = strategy;</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">action</span><span class="params">(String input)</span> </span>&#123;</div><div class="line">            strategy.operation(input);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">```    </div><div class="line">（<span class="number">4</span>）客户端，调用策略模式</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">    public class SimpleContext &#123;</div><div class="line">        private Strategy strategy;</div><div class="line">    </div><div class="line">        public SimpleContext(Strategy strategy) &#123;</div><div class="line">            this.strategy = strategy;</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">        public void action(String input) &#123;</div><div class="line">            strategy.operation(input);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">```    </div><div class="line">（4）客户端，调用策略模式</div></pre></td></tr></table></figure>
 <pre><code>public class Client {
     public static void main(String[] args) {
         Strategy strategy = new ConcreteStrategyA();
@@ -468,7 +468,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,11 +476,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -492,11 +496,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,11 +504,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
               </li>
             
             <div class="clearfix"></div>

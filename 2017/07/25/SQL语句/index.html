@@ -178,9 +178,9 @@
 <p>有这样一个功能：卡片和列表是一对多关系，卡片是属于列表的，并且卡片在列表中是有上下顺序的，并且任意两个卡片的位置可以相互交换，在某一个列表尾部添加卡片的时候，就要保证该卡片在此列表中的排序序号最大。</p>
 </blockquote>
 <p><em>思考</em>：在尾部插入新的卡片的时候，先查询到该列表下卡片最大的排序序号，将查到的排序序号加一就得到新的卡片的序号。<br>不过这样需要对数据库进行两次操作需要两条SQL，<br><a id="more"></a></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int max_serial_num = <span class="keyword">select</span> <span class="keyword">max</span>(serial_num) <span class="keyword">from</span> table_card <span class="keyword">where</span> list_id = XX;</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_card (card_name,create_time,serial_num ) <span class="keyword">values</span> (<span class="string">"ww"</span>,<span class="string">"0000-00-00"</span>,max_serial_num + <span class="number">1</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int max_serial_num = select max(serial_num) from table_card where list_id = XX;</div><div class="line">insert into table_card (card_name,create_time,serial_num ) values (&quot;ww&quot;,&quot;0000-00-00&quot;,max_serial_num + 1);</div></pre></td></tr></table></figure>
 <p>这样需要两条SQL，联想到select语句可以作为where条件子查询，能不能同样的将select作为子查询直接将结果插入，一条SQL语句搞定，<br>需要注意的是values子句中不能有子查询，所以</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_card (card_name,create_time,serial_num ) <span class="keyword">values</span> <span class="keyword">select</span> <span class="string">"ww"</span>,<span class="string">"0000-00-00"</span>,<span class="keyword">max</span>(serial_num) <span class="keyword">from</span> table_card;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">insert into table_card (card_name,create_time,serial_num ) values select &quot;ww&quot;,&quot;0000-00-00&quot;,max(serial_num) from table_card;</div></pre></td></tr></table></figure>
 
       
 
@@ -433,7 +433,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -441,11 +441,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,11 +461,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,11 +469,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
               </li>
             
             <div class="clearfix"></div>

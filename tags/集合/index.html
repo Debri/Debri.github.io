@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://debri.studio">
-  <title>快速排序 | Debri的博客</title>
+  <title>Tag: 集合 | Debri的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快速排序 是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的  时间复杂度 平均复杂度为 O(N*logN) 最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)">
-<meta name="keywords" content="算法,排序">
-<meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
-<meta property="og:url" content="http://debri.studio/2017/06/13/快速排序/index.html">
+  <meta name="description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Debri的博客">
+<meta property="og:url" content="http://debri.studio/tags/集合/index.html">
 <meta property="og:site_name" content="Debri的博客">
-<meta property="og:description" content="快速排序 是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的  时间复杂度 平均复杂度为 O(N*logN) 最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)">
+<meta property="og:description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-27T05:25:34.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速排序">
-<meta name="twitter:description" content="快速排序 是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的  时间复杂度 平均复杂度为 O(N*logN) 最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)">
+<meta name="twitter:title" content="Debri的博客">
+<meta name="twitter:description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
   
     <link rel="alternative" href="/atom.xml" title="Debri的博客" type="application/atom+xml">
   
@@ -153,177 +151,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-快速排序" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      快速排序
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/07/priorityQueue/" class="archive-article-date">
+  	<time datetime="2017-09-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-07</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/07/priorityQueue/">PriorityQueue  优先队列</a>
     </h1>
   
 
-        
-        <a href="/2017/06/13/快速排序/" class="archive-article-date">
-  	<time datetime="2017-06-13T09:34:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><blockquote>
-<p>是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的</p>
-</blockquote>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ol>
-<li>平均复杂度为 O(N*logN)</li>
-<li>最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)</li>
-</ol>
-<a id="more"></a>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><ol>
-<li>不需要借助辅助空间，在原数组上进行交换</li>
-</ol>
-<hr>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public void quickSort(int[] list, int low, int high) &#123;</div><div class="line">    if (low &lt; high) &#123;</div><div class="line">        int middle = getMiddle(list, low, high);  //将list数组进行一分为二</div><div class="line">        quickSort(list, low, middle - 1);        //对低字表进行递归排序</div><div class="line">        quickSort(list, middle + 1, high);       //对高字表进行递归排序</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">private static int getMiddle(int[] list, int low, int high) &#123;</div><div class="line">    int tmp = list[low];    //数组的第一个作为中轴</div><div class="line">    while (low &lt; high) &#123;</div><div class="line">        while (low &lt; high &amp;&amp; list[high] &gt; tmp) &#123;</div><div class="line">            high--;</div><div class="line">        &#125;</div><div class="line">        list[low] = list[high];   //比中轴小的记录移到低端</div><div class="line">        while (low &lt; high &amp;&amp; list[low] &lt; tmp) &#123;</div><div class="line">            low++;</div><div class="line">        &#125;</div><div class="line">        list[high] = list[low];   //比中轴大的记录移到高端</div><div class="line">    &#125;</div><div class="line">    list[low] = tmp;              //中轴记录到尾</div><div class="line">    return low;                   //返回中轴的位置</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h3 id="对单链表进行快排"><a href="#对单链表进行快排" class="headerlink" title="对单链表进行快排"></a>对单链表进行快排</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">public ListNode sortList(ListNode head) &#123;</div><div class="line">    if(head == null || head.next == null) return head;</div><div class="line">     </div><div class="line">    ListNode left = new ListNode(0), leftHead = left;</div><div class="line">    ListNode right = new ListNode(0), rightHead = right;</div><div class="line">    ListNode mid = new ListNode(0), midHead = mid;</div><div class="line">    int val = head.val;</div><div class="line">     </div><div class="line">    while(head != null) &#123;</div><div class="line">        if(head.val &lt; val) &#123;</div><div class="line">            left.next = head;</div><div class="line">            left = head;</div><div class="line">        &#125; else if(head.val &gt; val) &#123;</div><div class="line">            right.next = head;</div><div class="line">            right = head;</div><div class="line">        &#125; else &#123;</div><div class="line">            mid.next = head;</div><div class="line">            mid = head;</div><div class="line">        &#125;</div><div class="line">        head = head.next;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    left.next = null;</div><div class="line">    right.next = null;</div><div class="line">    mid.next = null;</div><div class="line">    return merge(sortList(leftHead.next), midHead.next, sortList(rightHead.next));</div><div class="line">&#125;</div><div class="line"> </div><div class="line">public ListNode merge(ListNode left, ListNode mid, ListNode right) &#123;</div><div class="line">    ListNode leftTail = getTail(left);</div><div class="line">    ListNode midTail = getTail(mid);</div><div class="line">    midTail.next = right;</div><div class="line">    if(leftTail != null) &#123;</div><div class="line">        leftTail.next = mid;</div><div class="line">        return left;</div><div class="line">    &#125; else &#123;</div><div class="line">        return mid;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">public ListNode getTail(ListNode head) &#123;</div><div class="line">    if(head == null) return head;</div><div class="line">    while(head.next != null) &#123;</div><div class="line">        head = head.next;</div><div class="line">    &#125;</div><div class="line">    return head;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>还有对数组排序的非递归实现</strong><br>借助栈来保存每次要进行比较的上下标志位</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">算法,排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://debri.studio/2017/06/13/快速排序/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/06/13/完全背包问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/06/13/插入排序/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">插入排序</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="快速排序" ></div> 
-<script type="text/javascript"> 
-(function(){ 
-var appid = "true"; 
-var conf = "true"; 
-var width = window.innerWidth || document.documentElement.clientWidth; 
-if (width < 960) { 
-window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-  
-
-  
+    
 
 
           </div>
@@ -346,9 +235,9 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

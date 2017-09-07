@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://debri.studio">
-  <title>快速排序 | Debri的博客</title>
+  <title>PriorityQueue  优先队列 | Debri的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快速排序 是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的  时间复杂度 平均复杂度为 O(N*logN) 最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)">
-<meta name="keywords" content="算法,排序">
+  <meta name="description" content="概述  基于优先级堆的无限优先级队列（这个队列是用数组实现的）。优先级队列的元素根据他们的Comparable自然排序或由队列构建时提供的比较器进行排序，具体取决于使用哪个构造函数（默认是小顶堆）。PriorityQueue不允许null元素。依赖于自然排序的优先级队列也不允许插入不可比较的对象（这样做可能导致ClassCastException）。  其通过堆实现，具体说是通过完全二叉树（com">
+<meta name="keywords" content="集合,堆,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
-<meta property="og:url" content="http://debri.studio/2017/06/13/快速排序/index.html">
+<meta property="og:title" content="PriorityQueue  优先队列">
+<meta property="og:url" content="http://debri.studio/2017/09/07/priorityQueue/index.html">
 <meta property="og:site_name" content="Debri的博客">
-<meta property="og:description" content="快速排序 是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的  时间复杂度 平均复杂度为 O(N*logN) 最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)">
+<meta property="og:description" content="概述  基于优先级堆的无限优先级队列（这个队列是用数组实现的）。优先级队列的元素根据他们的Comparable自然排序或由队列构建时提供的比较器进行排序，具体取决于使用哪个构造函数（默认是小顶堆）。PriorityQueue不允许null元素。依赖于自然排序的优先级队列也不允许插入不可比较的对象（这样做可能导致ClassCastException）。  其通过堆实现，具体说是通过完全二叉树（com">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-27T05:25:34.219Z">
+<meta property="og:updated_time" content="2017-09-07T06:53:55.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速排序">
-<meta name="twitter:description" content="快速排序 是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的  时间复杂度 平均复杂度为 O(N*logN) 最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)">
+<meta name="twitter:title" content="PriorityQueue  优先队列">
+<meta name="twitter:description" content="概述  基于优先级堆的无限优先级队列（这个队列是用数组实现的）。优先级队列的元素根据他们的Comparable自然排序或由队列构建时提供的比较器进行排序，具体取决于使用哪个构造函数（默认是小顶堆）。PriorityQueue不允许null元素。依赖于自然排序的优先级队列也不允许插入不可比较的对象（这样做可能导致ClassCastException）。  其通过堆实现，具体说是通过完全二叉树（com">
   
     <link rel="alternative" href="/atom.xml" title="Debri的博客" type="application/atom+xml">
   
@@ -153,42 +153,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-快速排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-priorityQueue" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      快速排序
+      PriorityQueue  优先队列
     </h1>
   
 
         
-        <a href="/2017/06/13/快速排序/" class="archive-article-date">
-  	<time datetime="2017-06-13T09:34:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-13</time>
+        <a href="/2017/09/07/priorityQueue/" class="archive-article-date">
+  	<time datetime="2017-09-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><blockquote>
-<p>是一种不稳定的排序，采用了经典的分治的思想，在Java里面的Arrays.sort()就是使用快排实现的</p>
+        <p>概述</p>
+<blockquote>
+<p>基于优先级堆的无限优先级队列（这个队列是用数组实现的）。优先级队列的元素根据他们的Comparable自然排序或由队列构建时提供的比较器进行排序，具体取决于使用哪个构造函数（默认是小顶堆）。<br>PriorityQueue不允许null元素。依赖于自然排序的优先级队列也不允许插入不可比较的对象（这样做可能导致ClassCastException）。</p>
 </blockquote>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ol>
-<li>平均复杂度为 O(N*logN)</li>
-<li>最坏(元素基本有序,中轴选择总是最大或最小 、元素,此时快速排序退化成冒泡排序)退化为冒泡排序，时间复杂度为O(N^2)</li>
-</ol>
+<p>其通过堆实现，具体说是通过完全二叉树（complete binary tree）实现的小顶堆（任意一个非叶子节点的权值，都不大于其左右子节点的权值），也就意味着通过数组来作为PriorityQueue的底层实现</p>
 <a id="more"></a>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><ol>
-<li>不需要借助辅助空间，在原数组上进行交换</li>
-</ol>
-<hr>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public void quickSort(int[] list, int low, int high) &#123;</div><div class="line">    if (low &lt; high) &#123;</div><div class="line">        int middle = getMiddle(list, low, high);  //将list数组进行一分为二</div><div class="line">        quickSort(list, low, middle - 1);        //对低字表进行递归排序</div><div class="line">        quickSort(list, middle + 1, high);       //对高字表进行递归排序</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">private static int getMiddle(int[] list, int low, int high) &#123;</div><div class="line">    int tmp = list[low];    //数组的第一个作为中轴</div><div class="line">    while (low &lt; high) &#123;</div><div class="line">        while (low &lt; high &amp;&amp; list[high] &gt; tmp) &#123;</div><div class="line">            high--;</div><div class="line">        &#125;</div><div class="line">        list[low] = list[high];   //比中轴小的记录移到低端</div><div class="line">        while (low &lt; high &amp;&amp; list[low] &lt; tmp) &#123;</div><div class="line">            low++;</div><div class="line">        &#125;</div><div class="line">        list[high] = list[low];   //比中轴大的记录移到高端</div><div class="line">    &#125;</div><div class="line">    list[low] = tmp;              //中轴记录到尾</div><div class="line">    return low;                   //返回中轴的位置</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h3 id="对单链表进行快排"><a href="#对单链表进行快排" class="headerlink" title="对单链表进行快排"></a>对单链表进行快排</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">public ListNode sortList(ListNode head) &#123;</div><div class="line">    if(head == null || head.next == null) return head;</div><div class="line">     </div><div class="line">    ListNode left = new ListNode(0), leftHead = left;</div><div class="line">    ListNode right = new ListNode(0), rightHead = right;</div><div class="line">    ListNode mid = new ListNode(0), midHead = mid;</div><div class="line">    int val = head.val;</div><div class="line">     </div><div class="line">    while(head != null) &#123;</div><div class="line">        if(head.val &lt; val) &#123;</div><div class="line">            left.next = head;</div><div class="line">            left = head;</div><div class="line">        &#125; else if(head.val &gt; val) &#123;</div><div class="line">            right.next = head;</div><div class="line">            right = head;</div><div class="line">        &#125; else &#123;</div><div class="line">            mid.next = head;</div><div class="line">            mid = head;</div><div class="line">        &#125;</div><div class="line">        head = head.next;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    left.next = null;</div><div class="line">    right.next = null;</div><div class="line">    mid.next = null;</div><div class="line">    return merge(sortList(leftHead.next), midHead.next, sortList(rightHead.next));</div><div class="line">&#125;</div><div class="line"> </div><div class="line">public ListNode merge(ListNode left, ListNode mid, ListNode right) &#123;</div><div class="line">    ListNode leftTail = getTail(left);</div><div class="line">    ListNode midTail = getTail(mid);</div><div class="line">    midTail.next = right;</div><div class="line">    if(leftTail != null) &#123;</div><div class="line">        leftTail.next = mid;</div><div class="line">        return left;</div><div class="line">    &#125; else &#123;</div><div class="line">        return mid;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">public ListNode getTail(ListNode head) &#123;</div><div class="line">    if(head == null) return head;</div><div class="line">    while(head.next != null) &#123;</div><div class="line">        head = head.next;</div><div class="line">    &#125;</div><div class="line">    return head;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>还有对数组排序的非递归实现</strong><br>借助栈来保存每次要进行比较的上下标志位</p>
+<p>优先级队列是无限制的，但是具有内部容量（capacity），用于管理用于存储队列中的元素的数组的大小。<br>它总是至少与队列大小一样大。 当元素被添加到优先级队列中时，其容量自动增长</p>
+<p>请注意，此实现不同步，不是线程安全的。实例并发如果任何线程修改队列。应该使用线程安全的java.util.concurrent.PriorityBlockingQueue类代替</p>
+<p>此类及其迭代器实现了 Collection 和 Iterator 接口的所有可选 方法。</p>
+<p>因为PriorityQueue对元素采用的是堆排序，头是按指定排序方式的最小元素。堆排序只能保证根是最大（最小），整个堆并不是有序的。<br>方法iterator()中提供的迭代器可能只是对整个数组的依次遍历。也就只能保证数组的第一个元素是最小的。</p>
+<p><strong>时间复杂度</strong></p>
+<ul>
+<li>插入方法（offer()、poll()、remove() 、add() 方法）时间复杂度为O(log(n)) ；</li>
+<li>remove(Object)和 contains(Object) 时间复杂度为O(n)；</li>
+<li>检索方法（peek、element 和 size）时间复杂度为常量。</li>
+</ul>
+<p>代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PriorityQueue</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractQueue</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">7720805057305804111L</span>;</div><div class="line">    <span class="comment">//初始容量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">11</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * Priority queue represented as a balanced binary heap: the two</span></div><div class="line"><span class="comment">     * children of queue[n] are queue[2*n+1] and queue[2*(n+1)].  The</span></div><div class="line"><span class="comment">     * priority queue is ordered by comparator, or by the elements'</span></div><div class="line"><span class="comment">     * natural ordering, if comparator is null: For each node n in the</span></div><div class="line"><span class="comment">     * heap and each descendant d of n, n &lt;= d.  The element with the</span></div><div class="line"><span class="comment">     * lowest value is in queue[0], assuming the queue is nonempty.</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">transient</span> Object[] queue; <span class="comment">// non-private to simplify nested class access</span></div><div class="line">    <span class="comment">//优先队列的元素数量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div><div class="line">    <span class="comment">//比较器</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Comparator&lt;? <span class="keyword">super</span> E&gt; comparator;</div><div class="line">    <span class="comment">// 数组的最大的长度，减去8是因为一些虚拟机在阵列中保留一些头文字。</span></div><div class="line">    <span class="comment">// 尝试分配较大的数组可能会导致OutOfMemoryError：请求的数组大小超过VM限制</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="number">8</span>;</div><div class="line"></div><div class="line">    <span class="comment">//数组扩容 </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> oldCapacity = queue.length;</div><div class="line">        <span class="comment">// 如果小于64，数组大小变为2倍。否则增长50%</span></div><div class="line">        <span class="keyword">int</span> newCapacity = oldCapacity + ((oldCapacity &lt; <span class="number">64</span>) ?</div><div class="line">                                         (oldCapacity + <span class="number">2</span>) :</div><div class="line">                                         (oldCapacity &gt;&gt; <span class="number">1</span>));</div><div class="line">        <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</div><div class="line">            newCapacity = hugeCapacity(minCapacity);</div><div class="line">        queue = Arrays.copyOf(queue, newCapacity);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//siftDown</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">siftDownComparable</span><span class="params">(<span class="keyword">int</span> k, E x)</span> </span>&#123;</div><div class="line">        Comparable&lt;? <span class="keyword">super</span> E&gt; key = (Comparable&lt;? <span class="keyword">super</span> E&gt;)x;</div><div class="line">        <span class="keyword">int</span> half = size &gt;&gt;&gt; <span class="number">1</span>;        <span class="comment">// loop while a non-leaf</span></div><div class="line">        <span class="keyword">while</span> (k &lt; half) &#123;</div><div class="line">            <span class="keyword">int</span> child = (k &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>; <span class="comment">// assume left child is least</span></div><div class="line">            Object c = queue[child];</div><div class="line">            <span class="keyword">int</span> right = child + <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (right &lt; size &amp;&amp;</div><div class="line">                ((Comparable&lt;? <span class="keyword">super</span> E&gt;) c).compareTo((E) queue[right]) &gt; <span class="number">0</span>)</div><div class="line">                c = queue[child = right];</div><div class="line">            <span class="keyword">if</span> (key.compareTo((E) c) &lt;= <span class="number">0</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            queue[k] = c;</div><div class="line">            k = child;</div><div class="line">        &#125;</div><div class="line">        queue[k] = key;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//添加元素</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(E e)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (e == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">int</span> i = size;</div><div class="line">        <span class="keyword">if</span> (i &gt;= queue.length)</div><div class="line">            grow(i + <span class="number">1</span>);</div><div class="line">        size = i + <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>)</div><div class="line">            queue[<span class="number">0</span>] = e;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            siftUp(i, e);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//siftUp</span></div><div class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">siftUpComparable</span><span class="params">(<span class="keyword">int</span> k, E x)</span> </span>&#123;</div><div class="line">        Comparable&lt;? <span class="keyword">super</span> E&gt; key = (Comparable&lt;? <span class="keyword">super</span> E&gt;) x;</div><div class="line">        <span class="keyword">while</span> (k &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">int</span> parent = (k - <span class="number">1</span>) &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">            Object e = queue[parent];</div><div class="line">            <span class="keyword">if</span> (key.compareTo((E) e) &gt;= <span class="number">0</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            queue[k] = e;</div><div class="line">            k = parent;</div><div class="line">        &#125;</div><div class="line">        queue[k] = key;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 
       
 
@@ -202,7 +203,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">算法,排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
@@ -258,7 +267,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://debri.studio/2017/06/13/快速排序/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://debri.studio/2017/09/07/priorityQueue/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -272,18 +281,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/13/完全背包问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/06/13/插入排序/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">插入排序</div>
+    <a href="/2017/09/05/红黑树/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">红黑树(Red–black tree)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -313,7 +313,7 @@
   
 
   
-  <div id="SOHUCS" sid="快速排序" ></div> 
+  <div id="SOHUCS" sid="priorityQueue" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = "true"; 

@@ -184,7 +184,7 @@
 <li>插入排序和冒泡排序一样是时间换空间的排序方法，没有使用多余的数据结构，不用分配额外的空间，所以空间复杂度为O（1）</li>
 </ol>
 <hr>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight stan"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public void insertionSort(<span class="selector-tag">int</span>[] <span class="title">data</span>) &#123;</div><div class="line">    <span class="selector-tag">int</span> i;</div><div class="line">    <span class="name">for</span> (<span class="selector-tag">int</span> j = <span class="number">0</span>; j &lt; <span class="title">data</span>.length; j++) &#123;</div><div class="line">        <span class="selector-tag">int</span> temp = <span class="title">data</span>[j];</div><div class="line">        <span class="name">for</span> (i = j; i &gt; <span class="number">0</span> &amp;&amp; temp &lt; <span class="title">data</span>[i - <span class="number">1</span>]; i--) &#123;</div><div class="line">            <span class="title">data</span>[i] = <span class="title">data</span>[i - <span class="number">1</span>];</div><div class="line">        &#125;</div><div class="line">        <span class="title">data</span>[i] = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public void insertionSort(int[] data) &#123;</div><div class="line">    int i;</div><div class="line">    for (int j = 0; j &lt; data.length; j++) &#123;</div><div class="line">        int temp = data[j];</div><div class="line">        for (i = j; i &gt; 0 &amp;&amp; temp &lt; data[i - 1]; i--) &#123;</div><div class="line">            data[i] = data[i - 1];</div><div class="line">        &#125;</div><div class="line">        data[i] = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
 
       
@@ -277,8 +277,8 @@
     </a>
   
   
-    <a href="/2017/06/13/完全背包问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2017/06/13/多重背包问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">多重背包</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -436,7 +436,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,11 +444,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -460,11 +464,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,11 +472,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
               </li>
             
             <div class="clearfix"></div>

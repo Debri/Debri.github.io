@@ -179,7 +179,7 @@
 </blockquote>
 <a id="more"></a>
 <h3 id="基本解法"><a href="#基本解法" class="headerlink" title="基本解法"></a>基本解法</h3><p>和完全背包问题很类似。基本的方程只需将完全背包问题的方程略微一改即可，因为对于第i种物品有n[i]+1种策略：取0件，取1件……取n[i]件。令f[i][v]表示前i种物品恰放入一个容量为v的背包的最大权值，则有状态转移方程：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f[<span class="string">i</span>][<span class="symbol">v</span>]=max&#123;f[<span class="string">i-1</span>][<span class="symbol">v-k*c[i</span>]]+k*w[i]|0<span class="xml"><span class="tag">&lt;<span class="name">=k</span>&lt;=<span class="string">n[i]&#125;</span></span></span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f[i][v]=max&#123;f[i-1][v-k*c[i]]+k*w[i]|0&lt;=k&lt;=n[i]&#125;</div></pre></td></tr></table></figure>
 <p>时间复杂度是O(V*Σn[i])。</p>
 <h3 id="转化为01背包问题"><a href="#转化为01背包问题" class="headerlink" title="转化为01背包问题"></a>转化为01背包问题</h3><p>另一种好想好写的基本方法是转化为01背包求解：把第i种物品换成n[i]件01背包中的物品，则得到了物品数为Σn[i]的01背包问题，直接求解，复杂度仍然是O(V*Σn[i])。</p>
 <p>但是我们期望将它转化为01背包问题之后能够像完全背包一样降低复杂度。仍然考虑二进制的思想，我们考虑把第i种物品换成若干件物品，使得原问题中第i种物品可取的每种策略——取0..n[i]件——均能等价于取若干件代换以后的物品。另外，取超过n[i]件的策略必不能出现。</p>
@@ -187,7 +187,7 @@
 <p>分成的这几件物品的系数和为n[i]，表明不可能取多于n[i]件的第i种物品。另外这种方法也能保证对于0..n[i]间的每一个整数，均可以用若干个系数的和表示，这个证明可以分0..2^k-1和2^k..n[i]两段来分别讨论得出，并不难，希望你自己思考尝试一下。</p>
 <p>这样就将第i种物品分成了O(log n[i])种物品，将原问题转化为了复杂度为<math>O(V*Σlog n[i])的01背包问题，是很大的改进。</math></p>
 <p>下面给出O(logN)时间处理一件多重背包中物品的过程，其中amount表示物品的数量：</p>
-<figure class="highlight cal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">procedure</span> <span class="title">MultiplePack</span><span class="params">(cost,weight,amount)</span></span></div><div class="line"><span class="function">    <span class="title">if</span> <span class="title">cost</span>*<span class="title">amount</span>&gt;=<span class="title">V</span></span></div><div class="line"><span class="function">        <span class="title">CompletePack</span><span class="params">(cost,weight)</span></span></div><div class="line"><span class="function">        <span class="title">return</span></span></div><div class="line"><span class="function">    <span class="title">integer</span> <span class="title">k</span>=1</span></div><div class="line"><span class="function">    <span class="title">while</span> <span class="title">k</span>&lt;<span class="title">amount</span></span></div><div class="line"><span class="function">        <span class="title">ZeroOnePack</span><span class="params">(k*cost,k*weight)</span></span></div><div class="line"><span class="function">        <span class="title">amount</span>=<span class="title">amount</span>-<span class="title">k</span></span></div><div class="line"><span class="function">        <span class="title">k</span>=<span class="title">k</span>*2</span></div><div class="line"><span class="function">    <span class="title">ZeroOnePack</span><span class="params">(amount*cost,amount*weight)</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">procedure MultiplePack(cost,weight,amount)</div><div class="line">    if cost*amount&gt;=V</div><div class="line">        CompletePack(cost,weight)</div><div class="line">        return</div><div class="line">    integer k=1</div><div class="line">    while k&lt;amount</div><div class="line">        ZeroOnePack(k*cost,k*weight)</div><div class="line">        amount=amount-k</div><div class="line">        k=k*2</div><div class="line">    ZeroOnePack(amount*cost,amount*weight)</div></pre></td></tr></table></figure>
 <p>先学习了理论，明天再编码实现吧，累~</p>
 
       
@@ -276,11 +276,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/13/完全背包问题/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/13/插入排序/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          (no title)
+          插入排序
         
       </div>
     </a>
@@ -445,7 +445,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -453,11 +453,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,11 +473,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -481,11 +481,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
               </li>
             
             <div class="clearfix"></div>
