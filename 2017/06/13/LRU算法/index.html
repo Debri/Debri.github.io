@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://debri.studio">
   <title>lRU 算法 | Debri的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="LRU实现算法 要求put()和get()的时间复杂度为O(1),就是为一个常数">
+  <meta name="description" content="LRU实现算法 要求put()和get()的时间复杂度为O(1),就是为一个常数  其实后面看了一些mybatis源码发现mybatis自己也实现了LruCache作为缓存的淘汰算法，原理是内部使用java的LinkedHashMap类，并且在构造的时候将accessOrder设为true，这样在每次使用的时候就会把刚刚使用的节点放到最后。详见org.apache.ibatis.cache.dec">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lRU 算法">
 <meta property="og:url" content="http://debri.studio/2017/06/13/LRU算法/index.html">
 <meta property="og:site_name" content="Debri的博客">
-<meta property="og:description" content="LRU实现算法 要求put()和get()的时间复杂度为O(1),就是为一个常数">
+<meta property="og:description" content="LRU实现算法 要求put()和get()的时间复杂度为O(1),就是为一个常数  其实后面看了一些mybatis源码发现mybatis自己也实现了LruCache作为缓存的淘汰算法，原理是内部使用java的LinkedHashMap类，并且在构造的时候将accessOrder设为true，这样在每次使用的时候就会把刚刚使用的节点放到最后。详见org.apache.ibatis.cache.dec">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-27T05:25:30.077Z">
+<meta property="og:updated_time" content="2017-09-08T07:51:05.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lRU 算法">
-<meta name="twitter:description" content="LRU实现算法 要求put()和get()的时间复杂度为O(1),就是为一个常数">
+<meta name="twitter:description" content="LRU实现算法 要求put()和get()的时间复杂度为O(1),就是为一个常数  其实后面看了一些mybatis源码发现mybatis自己也实现了LruCache作为缓存的淘汰算法，原理是内部使用java的LinkedHashMap类，并且在构造的时候将accessOrder设为true，这样在每次使用的时候就会把刚刚使用的节点放到最后。详见org.apache.ibatis.cache.dec">
   
     <link rel="alternative" href="/atom.xml" title="Debri的博客" type="application/atom+xml">
   
@@ -173,11 +173,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="LRU实现算法"><a href="#LRU实现算法" class="headerlink" title="LRU实现算法"></a>LRU实现算法</h2><blockquote>
+        <h4 id="LRU实现算法"><a href="#LRU实现算法" class="headerlink" title="LRU实现算法"></a>LRU实现算法</h4><blockquote>
 <p>要求put()和get()的时间复杂度为O(1),就是为一个常数</p>
 </blockquote>
-<a id="more"></a>
 <p>其实后面看了一些mybatis源码发现mybatis自己也实现了LruCache作为缓存的淘汰算法，原理是内部使用java的LinkedHashMap类，并且在构造的时候将accessOrder设为true，这样在每次使用的时候就会把刚刚使用的节点放到最后。详见org.apache.ibatis.cache.decorators.lruCache类</p>
+<a id="more"></a>
 <h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><ol>
 <li>函数get（key）如果键存在于缓存中，则获取键的值，否则返回-1。要求时间复杂度O（1）</li>
 <li>function put（key，value）如果键不存在，请设置或插入该值。如果值未定义，则忽略该操作。当缓存达到其容量时，它应该在插入新项目之前使最近使用的最少的项目无效。如果有两个或更多个具有相同频率的键，则使随机项无效。 要求时间复杂度O（1）</li>
@@ -189,7 +189,7 @@
 <li>每当get()一个页面，我们返回其值，并将该页面移动到双向队列的前面</li>
 <li>每当put()一个页面，如果页面已经存在，我们更新其值并将该页面移动到队列的前面，否则我们在Queue前面的缓存中添加一个新页面。但是，如果我们的缓存已经达到其容量，我们将从cache中删除最近最少未使用的页面（即队列中尾部的页面）。</li>
 </ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Map;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by Liuqi</div><div class="line"> * Date: 2017/5/9.</div><div class="line"> */</div><div class="line">public class LRUCache &#123;</div><div class="line"></div><div class="line">    int capacity;// 容量</div><div class="line">    Map&lt;Integer, Node&gt; map;</div><div class="line">    Node dummyEnd;</div><div class="line">    Node dummyHead;</div><div class="line">    int size;//当前大小</div><div class="line"></div><div class="line">    public LRUCache(int capacity) &#123;</div><div class="line">        this.capacity = capacity;</div><div class="line">        this.size = 0;</div><div class="line">        map = new HashMap&lt;Integer, Node&gt;();</div><div class="line">        dummyEnd = new Node(0, 0);</div><div class="line">        dummyHead = new Node(0, 0);</div><div class="line">        dummyEnd.next = dummyHead;</div><div class="line">        dummyHead.pre = dummyEnd;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int get(int key) &#123;</div><div class="line">        Node node = map.get(key);</div><div class="line">        if (node == null) &#123;</div><div class="line">            return -1;</div><div class="line">        &#125; else &#123;</div><div class="line">            remove(node);</div><div class="line">            putToHead(node);</div><div class="line">            return node.val;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void put(int key, int value) &#123;</div><div class="line">        Node oldNode = map.get(key);</div><div class="line">        if (oldNode == null) &#123;</div><div class="line">            ++size;</div><div class="line">            Node newNode = new Node(key, value);</div><div class="line">            map.put(key, newNode);</div><div class="line">            putToHead(newNode);</div><div class="line">            if (size &gt; capacity) &#123;</div><div class="line">                // 从LRU移除</div><div class="line">                // 要先取出nextNode, 不然map里remove的就是错误的点，即dummy.next.next。</div><div class="line">                Node nextNode = dummyEnd.next;</div><div class="line">                remove(nextNode);</div><div class="line">                // 从map移除</div><div class="line">                map.remove(nextNode.key);</div><div class="line">                --size;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            // 改变值，先移除，再放入头部</div><div class="line">            oldNode.val = value;</div><div class="line">            remove(oldNode);</div><div class="line">            putToHead(oldNode);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 加到头和前一个点的中间</div><div class="line">    public void putToHead(Node node) &#123;</div><div class="line">        Node preNode = dummyHead.pre;</div><div class="line">        preNode.next = node;</div><div class="line">        node.pre = preNode;</div><div class="line">        dummyHead.pre = node;</div><div class="line">        node.next = dummyHead;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //从双向链表中移除节点</div><div class="line">    public void remove(Node node) &#123;</div><div class="line">        node.next.pre = node.pre;</div><div class="line">        node.pre.next = node.next;</div><div class="line">        // node 如果从尾部移除，将不会指向任何点。</div><div class="line">        node.pre = null;</div><div class="line">        node.next = null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    class Node &#123;</div><div class="line">        int key, val;</div><div class="line">        Node pre, next;</div><div class="line"></div><div class="line">        public Node(int key, int val) &#123;</div><div class="line">            this.key = key;</div><div class="line">            this.val = val;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Created by Liuqi</span></div><div class="line"><span class="comment"> * Date: 2017/5/9.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> capacity;<span class="comment">// 容量</span></div><div class="line">    Map&lt;Integer, Node&gt; map;</div><div class="line">    Node dummyEnd;</div><div class="line">    Node dummyHead;</div><div class="line">    <span class="keyword">int</span> size;<span class="comment">//当前大小</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.capacity = capacity;</div><div class="line">        <span class="keyword">this</span>.size = <span class="number">0</span>;</div><div class="line">        map = <span class="keyword">new</span> HashMap&lt;Integer, Node&gt;();</div><div class="line">        dummyEnd = <span class="keyword">new</span> Node(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line">        dummyHead = <span class="keyword">new</span> Node(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line">        dummyEnd.next = dummyHead;</div><div class="line">        dummyHead.pre = dummyEnd;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</div><div class="line">        Node node = map.get(key);</div><div class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            remove(node);</div><div class="line">            putToHead(node);</div><div class="line">            <span class="keyword">return</span> node.val;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</div><div class="line">        Node oldNode = map.get(key);</div><div class="line">        <span class="keyword">if</span> (oldNode == <span class="keyword">null</span>) &#123;</div><div class="line">            ++size;</div><div class="line">            Node newNode = <span class="keyword">new</span> Node(key, value);</div><div class="line">            map.put(key, newNode);</div><div class="line">            putToHead(newNode);</div><div class="line">            <span class="keyword">if</span> (size &gt; capacity) &#123;</div><div class="line">                <span class="comment">// 从LRU移除</span></div><div class="line">                <span class="comment">// 要先取出nextNode, 不然map里remove的就是错误的点，即dummy.next.next。</span></div><div class="line">                Node nextNode = dummyEnd.next;</div><div class="line">                remove(nextNode);</div><div class="line">                <span class="comment">// 从map移除</span></div><div class="line">                map.remove(nextNode.key);</div><div class="line">                --size;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// 改变值，先移除，再放入头部</span></div><div class="line">            oldNode.val = value;</div><div class="line">            remove(oldNode);</div><div class="line">            putToHead(oldNode);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 加到头和前一个点的中间</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putToHead</span><span class="params">(Node node)</span> </span>&#123;</div><div class="line">        Node preNode = dummyHead.pre;</div><div class="line">        preNode.next = node;</div><div class="line">        node.pre = preNode;</div><div class="line">        dummyHead.pre = node;</div><div class="line">        node.next = dummyHead;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//从双向链表中移除节点</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Node node)</span> </span>&#123;</div><div class="line">        node.next.pre = node.pre;</div><div class="line">        node.pre.next = node.next;</div><div class="line">        <span class="comment">// node 如果从尾部移除，将不会指向任何点。</span></div><div class="line">        node.pre = <span class="keyword">null</span>;</div><div class="line">        node.next = <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> key, val;</div><div class="line">        Node pre, next;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.key = key;</div><div class="line">            <span class="keyword">this</span>.val = val;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
 
       
@@ -441,15 +441,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">session</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,11 +469,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">背包问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -481,7 +481,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">背包问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -489,7 +493,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java基础</a>
               </li>
             
             <div class="clearfix"></div>

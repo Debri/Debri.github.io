@@ -153,6 +153,155 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-transient关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/10/transient关键字/">transient关键字</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/10/transient关键字/" class="archive-article-date">
+  	<time datetime="2017-09-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-8.html#jls-8.3.1.3" target="_blank" rel="external">Java 语言规范</a> 中提到,transient 关键字用来说明指定属性不进行序列化.<br>若要理解 transient 关键字的作用,自然需要对序列化有一定的认识.</p>
+<p><strong>序列化</strong><br>序列化是用来<em>持久化</em>对象的状态 – 将对象转化为字节码保存到指定的文件中.类似地,可以通过反序列化,将字节码还原为对象原有的状态.序列化是 Java 中一个比较重要的概念,因为在网络编程中会经常用到序列化与反序列化机制.一个相对若想在网络中传输,就必须转化为字节的形式.而 Serializable接口就是用来标识某个类或接口可以转化为字节码,Serializable 可以认为是一个标识符,因为它没有任何的方法.<br>
+        
+          <a class="article-more-a" href="/2017/09/10/transient关键字/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-分布式Session" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/08/分布式Session/">分布式Session</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/08/分布式Session/" class="archive-article-date">
+  	<time datetime="2017-09-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="为什么要使用分布式Session"><a href="#为什么要使用分布式Session" class="headerlink" title="为什么要使用分布式Session"></a>为什么要使用分布式Session</h4><p>Web应用在单机部署的情况下，Session是被单个应用服务器存储管理的，由于只有一个应用服务器，用户的所有请求都是通过它进行响应处理的，所以能够很容易实现会话跟踪和保持。随着业务量的增长，系统架构需要做出调整以适应发展的需要，可能会使用分布式架构或微服务架构，无论使用哪种架构方式，应用系统单机部署的模式已经不能满足需求，所以会将应用系统部署到多台应用服务器上，用户的请求也会通过负载均衡转发到某个具体应用服务器上执行，可能会出现在A1系统登录后创建并保存Session，再次发起请求，请求被转发到A2系统上显示未登录的情况，此时单机部署模式下的Session机制已不能满足要求。所以，在分布式架构或微服务架构下，必须保证一个应用服务器上保存Session后，其它应用服务器可以同步或共享这个Session。</p>
+        
+          <a class="article-more-a" href="/2017/09/08/分布式Session/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">session</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-priorityQueue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -631,155 +780,6 @@
 
 
   
-    <article id="post-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/23/适配器模式/">适配器模式</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/23/适配器模式/" class="archive-article-date">
-  	<time datetime="2017-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="适配器模式（AdapterPattern）"><a href="#适配器模式（AdapterPattern）" class="headerlink" title="适配器模式（AdapterPattern）"></a>适配器模式（AdapterPattern）</h3><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
-<p>将一个接口转换成客户希望的另一个接口，适配器模式使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/07/23/适配器模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-最大公约数&amp;最小公倍数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/最大公约数&最小公倍数/">最大公约数&amp;最小公倍数</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/20/最大公约数&最小公倍数/" class="archive-article-date">
-  	<time datetime="2017-07-20T09:34:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="最大公约数-greatest-common-divisor"><a href="#最大公约数-greatest-common-divisor" class="headerlink" title="最大公约数(greatest common divisor)"></a>最大公约数(greatest common divisor)</h2><h3 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h3><blockquote>
-<p>欧几里德算法又称辗转相除法，用于计算两个整数a,b的最大公约数。其计算原理依赖于下面的定理： </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcd(a,b) = gcd(b,a mod b)</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/07/20/最大公约数&最小公倍数/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -902,15 +902,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">session</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -926,11 +930,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">背包问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -942,7 +942,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">背包问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -950,7 +954,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">算法,排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java基础</a>
               </li>
             
             <div class="clearfix"></div>
