@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Debri的博客">
 <meta property="og:description" content="最大公约数(greatest common divisor)欧几里得算法 欧几里德算法又称辗转相除法，用于计算两个整数a,b的最大公约数。其计算原理依赖于下面的定理：   1gcd(a,b) = gcd(b,a mod b)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-27T05:25:35.810Z">
+<meta property="og:updated_time" content="2017-09-13T11:22:35.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最大公约数&amp;最小公倍数">
 <meta name="twitter:description" content="最大公约数(greatest common divisor)欧几里得算法 欧几里德算法又称辗转相除法，用于计算两个整数a,b的最大公约数。其计算原理依赖于下面的定理：   1gcd(a,b) = gcd(b,a mod b)">
@@ -185,14 +185,8 @@
 <hr>
 <h2 id="最小公倍数-Least-Common-Multiple"><a href="#最小公倍数-Least-Common-Multiple" class="headerlink" title="最小公倍数(Least Common Multiple)"></a>最小公倍数(Least Common Multiple)</h2><p>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//求最小公倍数，</div><div class="line">private static int lcm(int a, int b)&#123;</div><div class="line">    return a*b/gcd(a, b);//调用上面最大公约数的代码</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>多个数的最小公倍数</p>
-<pre><code>public static long lcm(long[] a){
-    long value=a[0];
-        for(int i=1;i&lt;a.length;i++){
-            value=lcm(value,a[i]);
-        }
-    return value;
-}
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public static long lcm(long[] a)&#123;</div><div class="line">    long value=a[0];</div><div class="line">        for(int i=1;i&lt;a.length;i++)&#123;</div><div class="line">            value=lcm(value,a[i]);</div><div class="line">        &#125;</div><div class="line">    return value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
 
       
@@ -452,11 +446,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">session</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,11 +474,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color5">zookeeper</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">背包问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,7 +486,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">背包问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,7 +518,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
             
             <div class="clearfix"></div>
