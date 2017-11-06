@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://debri.studio">
-  <title>Archives: 2017/7 | Debri的博客</title>
+  <title>Redis过期策略实现 | Debri的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Debri的博客">
-<meta property="og:url" content="http://debri.studio/archives/2017/07/index.html">
+  <meta name="description" content="我们在使用redis时，一般会设置一个过期时间，当然也有不设置过期时间的，也就是永久不过期。 当我们设置了过期时间，redis是如何判断是否过期，以及根据什么策略来进行删除的。">
+<meta name="keywords" content="redis,过期策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis过期策略实现">
+<meta property="og:url" content="http://debri.studio/2017/10/29/Redis的过期策略实现/index.html">
 <meta property="og:site_name" content="Debri的博客">
-<meta property="og:description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
+<meta property="og:description" content="我们在使用redis时，一般会设置一个过期时间，当然也有不设置过期时间的，也就是永久不过期。 当我们设置了过期时间，redis是如何判断是否过期，以及根据什么策略来进行删除的。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-06T06:59:17.435Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Debri的博客">
-<meta name="twitter:description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
+<meta name="twitter:title" content="Redis过期策略实现">
+<meta name="twitter:description" content="我们在使用redis时，一般会设置一个过期时间，当然也有不设置过期时间的，也就是永久不过期。 当我们设置了过期时间，redis是如何判断是否过期，以及根据什么策略来进行删除的。">
   
     <link rel="alternative" href="/atom.xml" title="Debri的博客" type="application/atom+xml">
   
@@ -151,136 +153,207 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Redis的过期策略实现" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis过期策略实现
+    </h1>
+  
+
+        
+        <a href="/2017/10/29/Redis的过期策略实现/" class="archive-article-date">
+  	<time datetime="2017-10-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们在使用redis时，一般会设置一个过期时间，当然也有不设置过期时间的，也就是永久不过期。</p>
+<p>当我们设置了过期时间，redis是如何判断是否过期，以及根据什么策略来进行删除的。<br><a id="more"></a></p>
+<p>redis设置过期时间：</p>
+<hr>
+<pre><code>expire key time(以秒为单位)//这是最常用的方式
+setex(String key, int seconds, String,value)//字符串独有的方式
+</code></pre><hr>
+<blockquote>
+<p>除了字符串自己独有设置过期时间的方法外，其他方法都需要依靠expire方法来设置时间。如果没有设置时间，那缓存就是永不过期.如果设置了过期时间，之后又想让缓存永不过期，使用persist key</p>
+</blockquote>
+<p><em>三种过期策略：</em></p>
+<ol>
+<li>定时删除<blockquote>
+<p>含义：在设置key的过期时间的同时，为该key创建一个定时器，让定时器在key的过期时间来临时，对key进行删除</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>优点：保证内存被尽快释放</li>
+<li>缺点：若过期key很多，删除这些key会占用很多的CPU时间，在CPU时间紧张的情况下，CPU不能把所有的时间用来做要紧的事儿，还需要去花时间删除这些key定时器的创建耗时，若为每一个设置过期时间的key创建一个定时器（将会有大量的定时器产生），性能影响严重</li>
+</ul>
+<ol>
+<li>懒汉式删除<blockquote>
+<p>含义：key过期的时候不删除，每次通过key获取值的时候去检查是否过期，若过期，则删除，返回null。</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>优点：删除操作只发生在通过key取值的时候发生，而且只删除当前key，所以对CPU时间的占用是比较少的，而且此时的删除是已经到了非做不可的地步（如果此时还不删除的话，我们就会获取到了已经过期的key了）</li>
+<li>缺点：若大量的key在超出超时时间后，很久一段时间内，都没有被获取过，那么可能发生内存泄露（无用的垃圾占用了大量的内存）</li>
+</ul>
+<ol>
+<li>定期删除<blockquote>
+<p>含义：每隔一段时间执行一次删除过期key操作</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>优点：通过限制删除操作的时长和频率，来减少删除操作对CPU时间的占用–处理”定时删除”的缺点<br>定期删除过期key–处理”懒汉式删除”的缺点</li>
+<li>缺点：在内存友好方面，不如”定时删除”（会造成一定的内存占用，但是没有懒汉式那么占用内存）<br>在CPU时间友好方面，不如”懒汉式删除”（会定期的去进行比较和删除操作，cpu方面不如懒汉式，但是比定时好）</li>
+<li>难点：合理设置删除操作的执行时长（每次删除执行多长时间）和执行频率（每隔多长时间做一次删除）（这个要根据服务器运行情况来定了），每次执行时间太长，或者执行频率太高对cpu都是一种压力。<br>每次进行定期删除操作执行之后，需要记录遍历循环到了哪个标志位，以便下一次定期时间来时，从上次位置开始进行循环遍历</li>
+</ul>
+<p><em>应用：</em></p>
+<p><em>memcached</em> 只是用了惰性删除，而redis同时使用了惰性删除与定期删除，这也是二者的一个不同点（可以看做是redis优于memcached的一点）；</p>
+<p>对于懒汉式删除而言，并不是只有获取key的时候才会检查key是否过期，在某些设置key的方法上也会检查（eg.setnx key2 value2：该方法类似于memcached的add方法，如果设置的key2已经存在，那么该方法返回false，什么都不做；如果设置的key2不存在，那么该方法设置缓存key2-value2。假设调用此方法的时候，发现redis中已经存在了key2，但是该key2已经过期了，如果此时不执行删除操作的话，setnx方法将会直接返回false，也就是说此时并没有重新设置key2-value2成功，所以对于一定要在setnx执行之前，对key2进行过期检查）。</p>
+<p><strong>Redis采用的过期策略</strong></p>
+<p>懒汉式删除+定期删除</p>
+<p><em>懒汉式删除流程：</em><br>在进行get或setnx等操作时，先检查key是否过期；<br>若过期，删除key，然后执行相应操作；<br> 若没过期，直接执行相应操作；</p>
+<p><em>定期删除流程</em>（简单而言，对指定个数的每一个库随机删除小于等于指定数个过期key）：<br>遍历每个数据库（就是redis.conf中配置的”database”数量，默认为16）<br>检查当前库中的指定个数个key（默认是每个库检查20个key，注意相当于该循环执行20次，循环体是下边的描述）<br>如果当前库中没有一个key设置了过期时间，直接执行下一个库的遍历<br>随机获取一个设置了过期时间的key，检查该key是否过期，如果过期，删除key<br>判断定期删除操作是否已经达到指定时长，若已经达到，直接退出定期删除。</p>
+<p>对于定期删除，在程序中有一个全局变量current_db来记录下一个将要遍历的库，假设有16个库，我们这一次定期删除遍历了10个，那此时的current_db就是11，下一次定期删除就从第11个库开始遍历，假设current_db等于15了，那么之后遍历就再从0号库开始（此时current_db==0）</p>
+<p> 在实际中，如果我们要自己设计过期策略，在使用懒汉式删除+定期删除时，控制时长和频率这个尤为关键，需要结合服务器性能，已经并发量等情况进行调整，以致最佳。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/25/SQL语句/" class="archive-article-date">
-  	<time datetime="2017-07-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/25/SQL语句/">在insert语句里使用select查询</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/23/适配器模式/" class="archive-article-date">
-  	<time datetime="2017-07-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/23/适配器模式/">适配器模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">过期策略</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://debri.studio/2017/10/29/Redis的过期策略实现/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/最大公约数&最小公倍数/" class="archive-article-date">
-  	<time datetime="2017-07-20T09:34:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/21/简述cdn技术/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">简述CDN技术</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/最大公约数&最小公倍数/">最大公约数&amp;最小公倍数</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
+  <div id="SOHUCS" sid="Redis的过期策略实现" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
   
 
-    
+  
 
 
           </div>
@@ -303,8 +376,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
