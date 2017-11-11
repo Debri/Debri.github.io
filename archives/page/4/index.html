@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://debri.studio">
-  <title>SQL语句 | Debri的博客</title>
+  <title>Archives | Debri的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SQL语句执行过程 当客户端和Server端建立数据库TCP连接以后，客户端的任务就是先Server端发送SQL语句，获得结果。真正的SQL的相关处理发生在Server端">
-<meta name="keywords" content="MySQL">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SQL语句">
-<meta property="og:url" content="http://debri.studio/2017/05/21/SQL语句执行过程/index.html">
+  <meta name="description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Debri的博客">
+<meta property="og:url" content="http://debri.studio/archives/page/4/index.html">
 <meta property="og:site_name" content="Debri的博客">
-<meta property="og:description" content="SQL语句执行过程 当客户端和Server端建立数据库TCP连接以后，客户端的任务就是先Server端发送SQL语句，获得结果。真正的SQL的相关处理发生在Server端">
+<meta property="og:description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-27T05:25:32.283Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL语句">
-<meta name="twitter:description" content="SQL语句执行过程 当客户端和Server端建立数据库TCP连接以后，客户端的任务就是先Server端发送SQL语句，获得结果。真正的SQL的相关处理发生在Server端">
+<meta name="twitter:title" content="Debri的博客">
+<meta name="twitter:description" content="重庆邮电大学信息管理与信息系统专业18级，Java后端研发，现于猪八戒实习">
   
     <link rel="alternative" href="/atom.xml" title="Debri的博客" type="application/atom+xml">
   
@@ -153,213 +151,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SQL语句执行过程" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      SQL语句
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/04/12/策略模式/" class="archive-article-date">
+  	<time datetime="2017-04-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-12</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/04/12/策略模式/">策略模式</a>
     </h1>
   
 
-        
-        <a href="/2017/05/21/SQL语句执行过程/" class="archive-article-date">
-  	<time datetime="2017-05-21T02:34:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="SQL语句执行过程"><a href="#SQL语句执行过程" class="headerlink" title="SQL语句执行过程"></a>SQL语句执行过程</h2><blockquote>
-<p>当客户端和Server端建立数据库TCP连接以后，客户端的任务就是先Server端发送SQL语句，获得结果。真正的SQL的相关处理发生在Server端</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="当Server端收到了Client发送的SQL语句以后"><a href="#当Server端收到了Client发送的SQL语句以后" class="headerlink" title="当Server端收到了Client发送的SQL语句以后"></a>当Server端收到了Client发送的SQL语句以后</h3><ol>
-<li>查询高速缓存，如果存在相同的执行计划，则会直接执行这个SQL省区后面的工作<ul>
-<li>从内存中读取数据要比从硬盘中的数据文件中读取数据效率要高</li>
-<li>另外一方面省去了解析SQL语句</li>
-</ul>
-</li>
-<li>首先对SQL语句进行语法解析，服务器进程就会开始检查这条语句的合法性。这里主要是对 SQL 语句的语法进行检查,看看其是否合乎语法规则。</li>
-<li>进行语义解析，服务器进程接下去会对语句中的字段、表等内容进行检查。看看这些字段、表是否在数据库中。<ul>
-<li>如果表名与列名不准确的话,则数据库会就会反馈错误信息给客户端。</li>
-</ul>
-</li>
-<li>获得对象的解析锁，系统就会对我们需要查询的对象加锁。<ul>
-<li>这主要是为了保障数据的一致性,防止我们在查询的过程中,其他用户对这个对象发生改变。</li>
-</ul>
-</li>
-<li>数据访问权限的核对，服务器进程还会检查,你所连接的用户是否有这个数据访问的权限。若你连接上服务器的用户不具有数据访问权限的话,则客户端就不能够取得这些数据。<ul>
-<li>数据库服务器进程<strong>先检查语法与语义,然后才会检查访问权限</strong></li>
-</ul>
-</li>
-<li>确定最佳执行计划。服务器进程会根据一定的规则,对这条语句进行优化<ul>
-<li>不过要注意,这个优化是有限的。</li>
-<li>一般在应用软件开发的过程中,需要对数据库的 sql 语言进行优化,这个优化的作用要大大地大于服务器进程的自我优化。</li>
-<li>当服务器进程的优化器<strong>确定这条查询语句的最佳执行计划后,就会将这条 SQL 语句与执行计划保存到数据高速缓存(library cache)</strong>。如此的话,等以后还有这个查询时,就会省略以上的语法、语义与权限检查的步骤,<br>而直接执行 SQL 语句,提高 SQL 语句处理效率。</li>
-</ul>
-</li>
-<li><p>执行语句。执行语句也分成两种情况</p>
-<ul>
-<li>一是若被选择行所在的数据块已经被读取到数据缓冲区的话,则服务器进程会直接把这个数据传递给客户端,而不是从数据库文件中去查询数据。</li>
-<li>若数据不在缓冲区中,则服务器进程将从数据库文件中查询相关数据,并把这些数据放入到数据缓冲区中(buffer cache)。</li>
-</ul>
-</li>
-<li><p>提取结果。当语句执行完成之后,查询到的数据还是在服务器进程中,还没有被传送到客户端的用户进程，所以,在服务器端的进程中,有一个专门负责数据提取的一段代码。他的作用就是把查询到的数据结果返回给用户端进程,从而完成整个查询动作。从这整个查询处理过程中,我们在数据库开发或者应用软件开发过<br>程中,需要注意以下几点:</p>
-<ul>
-<li>一是要了解数据库缓存跟应用软件缓存是两码事情。数据库缓存只有在数据库服务器端才存在,在<br>客户端是不存在的。只有如此,才能够保证数据库缓存中的内容跟数据库文件的内容一致。才能够根据<br>相关的规则,防止数据脏读、错读的发生。而应用软件所涉及的数据缓存,由于跟数据库缓存不是一码事<br>情,所以,应用软件的数据缓存虽然可以提高数据的查询效率,但是,却打破了数据一致性的要求,有时候<br>会发生脏读、错读等情况的发生。所以,有时候,在应用软件上有专门一个功能,用来在必要的时候清除<br>数据缓存。不过,这个数据缓存的清除,也只是清除本机上的数据缓存,或者说,只是清除这个应用程序<br>的数据缓存,而不会清除数据库的数据缓存。</li>
-<li>二是绝大部分 SQL 语句都是按照这个处理过程处理的。我们 DBA 或者基于 Oracle 数据库的<br>开发人员了解这些语句的处理过程,对于我们进行涉及到 SQL 语句的开发与调试,是非常有帮助的。有<br>时候,掌握这些处理原则,可以减少我们排错的时间。特别要注意,数据库是把数据查询权限的审查放在<br>语法语义的后面进行检查的。所以,有时会若光用数据库的权限控制原则,可能还不能满足应用软件权限<br>控制的需要。此时,就需要应用软件的前台设置,实现权限管理的要求。而且,有时应用数据库的权限管<br>理,也有点显得繁琐,会增加服务器处理的工作量。因此,对于记录、字段等的查询权限控制,大部分程<br>序涉及人员喜欢在应用程序中实现,而不是在数据库上实现。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="SQL语句中的函数、关键字、排序等执行顺序"><a href="#SQL语句中的函数、关键字、排序等执行顺序" class="headerlink" title="SQL语句中的函数、关键字、排序等执行顺序:"></a>SQL语句中的函数、关键字、排序等执行顺序:</h3><ol>
-<li>FROM 子句返回初始结果集。</li>
-<li>WHERE 子句排除不满足搜索条件的行。</li>
-<li>GROUP BY 子句将选定的行收集到 GROUP BY 子句中各个唯一值的组中。</li>
-<li>选择列表中指定的聚合函数可以计算各组的汇总值。</li>
-<li>此外,HAVING 子句排除不满足搜索条件的行。</li>
-<li>计算所有的表达式;</li>
-<li>使用 order by 对结果集进行排序。</li>
-<li>查找你要搜索的字段。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://debri.studio/2017/05/21/SQL语句执行过程/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/06/13/多重背包问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          多重背包
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/04/24/装饰器模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">装饰器模式</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="SQL语句执行过程" ></div> 
-<script type="text/javascript"> 
-(function(){ 
-var appid = "true"; 
-var conf = "true"; 
-var width = window.innerWidth || document.documentElement.clientWidth; 
-if (width < 960) { 
-window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
   
 
 
@@ -383,8 +231,8 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
